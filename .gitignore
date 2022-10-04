@@ -1,0 +1,8 @@
+# ignore builing process
+build/
+#ignore binary files
+install/
+
+#ignore log messages files
+log/
+.vscode/
