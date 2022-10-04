@@ -20,8 +20,8 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(temp_interfaces REQUIRED)
 find_package(fmt REQUIRED CONFIG)
-add_executable(client src/client.cpp)
-
+add_executable(client src/client.cpp src/client_base.cpp)
+target_include_directories(client PUBLIC include/temperature_client_no1)
 ament_target_dependencies(client rclcpp temp_interfaces fmt)
 
 if(BUILD_TESTING)

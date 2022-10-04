@@ -1,43 +1,4 @@
-#include "rclcpp/rclcpp.hpp"
-#include "temp_interfaces/srv/temp.hpp"
-#include <thread>
-#include <chrono>
-#include <cstdlib>
-#include <memory>
-#include <fmt/core.h>
-using namespace std::this_thread; // sleep_for, sleep_until
-using namespace std::chrono_literals;
-using namespace std::chrono;
-
-class client_node : public rclcpp::Node
-{
-private:
-    std::shared_ptr<temp_interfaces::srv::Temp_Request> request;
-    std::shared_ptr<rclcpp::Client<temp_interfaces::srv::Temp>> client;
-
-public:
-    std::shared_future<std::shared_ptr<temp_interfaces::srv::Temp_Response>> result;
-
-    client_node() noexcept : Node("temp_client")
-    {
-        client = this->create_client<temp_interfaces::srv::Temp>("temperature_degree");
-        request = std::make_shared<temp_interfaces::srv::Temp::Request>();
-        client->wait_for_service(1s);
-        result = client->async_send_request(request);
-    }
-
-    double getTemperature() const
-    {
-        auto temp = result.get()->temp.temperature;
-        if (!temp)
-        {
-            throw std::runtime_error("can't get temerature from server");
-        }
-
-        return temp;
-    }
-};
-using namespace std::chrono_literals;
+#include "client_base.h"
 
 int main(int argc, char **argv)
 {
