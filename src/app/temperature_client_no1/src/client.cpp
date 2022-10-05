@@ -22,7 +22,8 @@ int main(int argc, char **argv)
             count %= 5;
             if (!count)
             {
-                fmt::print("the temperature average {}", accumulation / 5.0);
+                // fmt::print("the temperature average {}", accumulation / 5.0);
+                RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "the temperature average %f", accumulation / 5.0);
                 accumulation = 0;
             }
         }

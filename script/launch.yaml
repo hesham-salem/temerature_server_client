@@ -1,0 +1,11 @@
+launch:
+      - node:
+              pkg: "temperature_client_no1"
+              exec: "client"
+              name: "client"
+              namespace: "ns"
+      - node:
+              pkg: "temperature_server"
+              exec: "server"
+              name: "server"
+              namespace: "ns"
