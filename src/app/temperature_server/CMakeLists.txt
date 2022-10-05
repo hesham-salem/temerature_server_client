@@ -21,8 +21,9 @@ find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(temp_interfaces REQUIRED)
 
-add_executable(server src/server.cpp)
+add_executable(server src/server.cpp src/server_base.cpp)
 ament_target_dependencies(server rclcpp sensor_msgs temp_interfaces)
+target_include_directories(server PUBLIC include/temperature_server)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
